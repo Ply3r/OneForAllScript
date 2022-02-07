@@ -114,5 +114,6 @@ const insertItens = async () => {
     await connection.execute(query, [usuarioIdCancao[index], cancao, dataReproducao[index]])
   }));
   console.log('Insert completed');
+  process.exit(0)
 }
 insertItens();
