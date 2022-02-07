@@ -79,10 +79,9 @@ const artistaSegundoArtistaIds = artistaSegundoArtista
 
 //  USUARIO_CANCAO TABLE
 const [dataReproducao, usuarioIdCancao] = getInfosInARow(getByColumnAndInterval('E', [2, 11]));
-const [cancoesUsuarioCancao] = getInfosInARow(getByColumnAndInterval('D', [2, 10]));
+const [cancoesUsuarioCancao] = getInfosInARow(getByColumnAndInterval('D', [2, 11]));
 const cancoesId = cancoesUsuarioCancao
   .map((value) => cancao.findIndex((key) => key === value) + 1)
-  .filter(Boolean);
 
 //  INSERT ITENS
 const insertItens = async () => {
@@ -114,5 +113,6 @@ const insertItens = async () => {
     const query = 'INSERT IGNORE INTO usuario_cancao(usuario_id, cancao_id, data_reproducao) VALUES (?, ?, ?)'
     await connection.execute(query, [usuarioIdCancao[index], cancao, dataReproducao[index]])
   }));
+  console.log('Insert completed');
 }
 insertItens();
