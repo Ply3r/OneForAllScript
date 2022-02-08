@@ -50,7 +50,9 @@ const cancoes = getByColumnAndInterval('D', [14, 23]);
 
 //  PLANO TABLE
 const plano = getUniqueArray([...planos]);
-const planoValor = getByColumnAndInterval('H', [2, 11]).map((value) => parseFloat(value))
+const planoValor = getByColumnAndInterval('H', [2, 11])
+  .map((value) => value.replace(',', '.'))
+  .map((value) => +value)
 
 //  USUARIO TABLE
 const usuario = getByColumnAndInterval('B', [2, 11]);
@@ -75,7 +77,6 @@ const [duracaoSegundos, albumCancao] = getInfosInARow(getByColumnAndInterval('E'
 const [artistaSegundoArtista, usuarioSeguindoArtista] = getInfosInARow(getByColumnAndInterval('K', [2, 11]));
 const artistaSegundoArtistaIds = artistaSegundoArtista
   .map((value) => artista.findIndex((artista) => value === artista) + 1)
-  .filter(Boolean)
 
 //  USUARIO_CANCAO TABLE
 const [dataReproducao, usuarioIdCancao] = getInfosInARow(getByColumnAndInterval('E', [2, 11]));
