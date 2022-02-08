@@ -50,7 +50,9 @@ const cancoes = getByColumnAndInterval('D', [14, 23]);
 
 //  PLANO TABLE
 const plano = getUniqueArray([...planos]);
-const planoValor = getByColumnAndInterval('H', [2, 11]).map((value) => parseFloat(value))
+const planoValor = getByColumnAndInterval('H', [2, 11])
+  .map((value) => value.replace(',', '.'))
+  .map((value) => +value)
 
 //  USUARIO TABLE
 const usuario = getByColumnAndInterval('B', [2, 11]);
