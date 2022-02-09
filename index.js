@@ -87,31 +87,31 @@ const cancoesId = cancoesUsuarioCancao
 //  INSERT ITENS
 const insertItens = async () => {
   await Promise.all(plano.map(async (plano, index) => {
-    const query = `INSERT INTO planos(plano, valor) VALUES (?, ?)`
+    const query = `INSERT INTO plano(plano, valor) VALUES (?, ?)`
     await connection.execute(query, [plano, planoValor[index]])
   }));
   await Promise.all(usuario.map(async (usuario, index) => {
-    const query = `INSERT IGNORE INTO usuarios(usuario, idade, id_plano, data_registro) VALUES (?, ?, ?, ?)`
+    const query = `INSERT IGNORE INTO usuario(usuario, idade, plano_id, data_assinatura) VALUES (?, ?, ?, ?)`
     await connection.execute(query, [usuario, usuarioAge[index], planoId[index], dataAssinatura[index]])
   }));
   await Promise.all(artista.map(async (artista) => {
-    const query = 'INSERT INTO artistas(artista) VALUES (?)'
+    const query = 'INSERT INTO artista(artista) VALUES (?)'
     await connection.execute(query, [artista])
   }));
   await Promise.all(album.map(async (album, index) => {
-    const query = 'INSERT INTO album(album, id_artista, ano_lancamento) VALUES (?, ?, ?)'
+    const query = 'INSERT INTO album(album, artista_id, ano_lancamento) VALUES (?, ?, ?)'
     await connection.execute(query, [album, artistaAlbum[index], anoLancamento[index]])
   }));
   await Promise.all(cancao.map(async (cancao, index) => {
-    const query = 'INSERT INTO musicas(nome, id_album, duracao) VALUES (?, ?, ?)'
+    const query = 'INSERT INTO cancao(cancao, album_id, duracao_segundos) VALUES (?, ?, ?)'
     await connection.execute(query, [cancao, albumCancao[index], duracaoSegundos[index]])
   }));
   await Promise.all(artistaSegundoArtistaIds.map(async (artista, index) => {
-    const query = 'INSERT IGNORE INTO artistas_seguidos(id_usuario, id_artista) VALUES (?, ?)'
+    const query = 'INSERT IGNORE INTO seguindo_artistas(usuario_id, artista_id) VALUES (?, ?)'
     await connection.execute(query, [usuarioSeguindoArtista[index], artista])
   }));
   await Promise.all(cancoesId.map(async (cancao, index) => {
-    const query = 'INSERT IGNORE INTO historico_reproducoes(id_usuario, id_musica, data_reproducao) VALUES (?, ?, ?)'
+    const query = 'INSERT IGNORE INTO usuario_cancao(usuario_id, cancao_id, data_reproducao) VALUES (?, ?, ?)'
     await connection.execute(query, [usuarioIdCancao[index], cancao, dataReproducao[index]])
   }));
   console.log('Insert completed');
