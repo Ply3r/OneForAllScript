@@ -1,13 +1,3 @@
-
-## Author
-
-- [@Ply3r](https://github.com/Ply3r) -- Leandro Henrique
-
-
-## Contribuitors
-- [@xafixav](https://github.com/xafixav) -- Gustavo Andrade
-
-
 # One for All script
 
 Este projeto foi criado com o intuito de ajudar a popular a tabela do projeto one-for-all da Trybe.
@@ -51,4 +41,14 @@ const connection = mysql.createPool({
 ```
 
 > Em caso de sucesso a seguinte mensagem ira aparecer **Insert completed**
+
+
+## Author
+
+- [@Ply3r](https://github.com/Ply3r) -- Leandro Henrique
+
+
+## Contribuitors
+- [@xafixav](https://github.com/xafixav) -- Gustavo Andrade
+
 
