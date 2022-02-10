@@ -37,7 +37,7 @@ const connection = mysql.createPool({
 * Abra o **terminal** e rode o seguinte comando:
 
 ```bash
-  node index.js
+  npm start
 ```
 
 > Em caso de sucesso a seguinte mensagem ira aparecer **Insert completed**
