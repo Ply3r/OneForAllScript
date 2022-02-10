@@ -72,6 +72,7 @@ const anoLancamento = getByColumnAndInterval('F', [14, 23]);
 //  CANÇÃO TABLE
 const [cancao] = getInfosInARow(cancoes);
 const [duracaoSegundos, albumCancao] = getInfosInARow(getByColumnAndInterval('E', [14, 23]));
+const duracaoSegundosInt = duracaoSegundos.map((value) => +value)
 
 // SEGUINDO_ARTISTA TABLE
 const [artistaSegundoArtista, usuarioSeguindoArtista] = getInfosInARow(getByColumnAndInterval('K', [2, 11]));
@@ -86,34 +87,50 @@ const cancoesId = cancoesUsuarioCancao
 
 //  INSERT ITENS
 const insertItens = async () => {
-  await Promise.all(plano.map(async (plano, index) => {
+  console.log('Start insert')
+
+  for (const [index, item] of plano.entries()) {
     const query = `INSERT INTO plano(plano, valor) VALUES (?, ?)`
-    await connection.execute(query, [plano, planoValor[index]])
-  }));
-  await Promise.all(usuario.map(async (usuario, index) => {
+    await connection.execute(query, [item, planoValor[index]])
+  }
+  console.log('finish insert into plano table')
+
+  for (const [index, item] of usuario.entries()) {
     const query = `INSERT IGNORE INTO usuario(usuario, idade, plano_id, data_assinatura) VALUES (?, ?, ?, ?)`
-    await connection.execute(query, [usuario, usuarioAge[index], planoId[index], dataAssinatura[index]])
-  }));
-  await Promise.all(artista.map(async (artista) => {
+    await connection.execute(query, [item, usuarioAge[index], planoId[index], dataAssinatura[index]])
+  }
+  console.log('finish insert into usuario table')
+
+  for (const [_index, item] of artista.entries()) {
     const query = 'INSERT INTO artista(artista) VALUES (?)'
-    await connection.execute(query, [artista])
-  }));
-  await Promise.all(album.map(async (album, index) => {
+    await connection.execute(query, [item])
+  }
+  console.log('finish insert into artista table')
+
+  for (const [index, item] of album.entries()) {
     const query = 'INSERT INTO album(album, artista_id, ano_lancamento) VALUES (?, ?, ?)'
-    await connection.execute(query, [album, artistaAlbum[index], anoLancamento[index]])
-  }));
-  await Promise.all(cancao.map(async (cancao, index) => {
+    await connection.execute(query, [item, artistaAlbum[index], anoLancamento[index]])
+  }
+  console.log('finish insert into album table')
+
+  for (const [index, item] of cancao.entries()) {
     const query = 'INSERT INTO cancao(cancao, album_id, duracao_segundos) VALUES (?, ?, ?)'
-    await connection.execute(query, [cancao, albumCancao[index], duracaoSegundos[index]])
-  }));
-  await Promise.all(artistaSegundoArtistaIds.map(async (artista, index) => {
+    await connection.execute(query, [item, albumCancao[index], duracaoSegundosInt[index]])
+  }
+  console.log('finish insert into cancao table')
+
+  for (const [index, item] of artistaSegundoArtistaIds.entries()) {
     const query = 'INSERT IGNORE INTO seguindo_artistas(usuario_id, artista_id) VALUES (?, ?)'
-    await connection.execute(query, [usuarioSeguindoArtista[index], artista])
-  }));
-  await Promise.all(cancoesId.map(async (cancao, index) => {
+    await connection.execute(query, [usuarioSeguindoArtista[index], item])
+  }
+  console.log('finish insert into seguindo_artistas table')
+
+  for (const [index, item] of cancoesId.entries()) {
     const query = 'INSERT IGNORE INTO usuario_cancao(usuario_id, cancao_id, data_reproducao) VALUES (?, ?, ?)'
-    await connection.execute(query, [usuarioIdCancao[index], cancao, dataReproducao[index]])
-  }));
+    await connection.execute(query, [usuarioIdCancao[index], item, dataReproducao[index]])
+  }
+  console.log('finish insert into usuario_cancao table')
+
   console.log('Insert completed');
   process.exit(0)
 }
