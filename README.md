@@ -46,7 +46,7 @@ const connection = mysql.createPool({
 
 > Em caso de sucesso a seguinte mensagem ira aparecer **Insert completed**
 
-Testes usando o Script:
+## Testes usando os INSERTs do Script:
 ![Testes usando o Script](./images/TESTSUCESS.png)
 
 ## Author
