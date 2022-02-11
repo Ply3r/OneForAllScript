@@ -3,8 +3,6 @@
 Este projeto foi criado com o intuito de ajudar a popular a tabela do projeto one-for-all da Trybe.
 
 
-
-
 ## Deployment
 
 O script espera que sua normalização siga esse formato:
