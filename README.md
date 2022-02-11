@@ -3,8 +3,6 @@
 Este projeto foi criado com o intuito de ajudar a popular a tabela do projeto one-for-all da Trybe.
 
 
-
-
 ## Deployment
 
 O script espera que sua normalização siga esse formato:
@@ -37,11 +35,17 @@ const connection = mysql.createPool({
 * Abra o **terminal** e rode o seguinte comando:
 
 ```bash
+  node index.js
+```
+
+```
   npm start
 ```
 
 > Em caso de sucesso a seguinte mensagem ira aparecer **Insert completed**
 
+## Testes usando os INSERTs do Script:
+![Testes usando o Script](./images/TESTSUCESS.png)
 
 ## Author
 
@@ -50,5 +54,3 @@ const connection = mysql.createPool({
 
 ## Contribuitors
 - [@xafixav](https://github.com/xafixav) -- Gustavo Andrade
-
-
